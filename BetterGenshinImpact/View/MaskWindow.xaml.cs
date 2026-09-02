@@ -299,17 +299,17 @@ public partial class MaskWindow : Window
 
     private void PrintSystemInfo()
     {
-        _logger.LogInformation("更好的原神 {Version}", Global.Version);
+        _logger.LogInformation(Service.I18n.I18nService.Instance.Translate("更好的原神 {Version}"), Global.Version);
         var systemInfo = TaskContext.Instance().SystemInfo;
         var width = systemInfo.GameScreenSize.Width;
         var height = systemInfo.GameScreenSize.Height;
         var dpiScale = TaskContext.Instance().DpiScale;
-        _logger.LogInformation("遮罩窗口已启动，游戏大小{Width}x{Height}，素材缩放{Scale}，DPI缩放{Dpi}",
+        _logger.LogInformation(Service.I18n.I18nService.Instance.Translate("遮罩窗口已启动，游戏大小{Width}x{Height}，素材缩放{Scale}，DPI缩放{Dpi}"),
             width, height, systemInfo.AssetScale.ToString("F"), dpiScale);
 
         if (width * 9 != height * 16)
         {
-            _logger.LogError("当前游戏分辨率不是16:9，一条龙、配队识别、地图传送、地图追踪等所有独立任务与全自动任务相关功能，都将会无法正常使用！");
+            _logger.LogError(Service.I18n.I18nService.Instance.Translate("当前游戏分辨率不是16:9，一条龙、配队识别、地图传送、地图追踪等所有独立任务与全自动任务相关功能，都将会无法正常使用！"));
         }
 
         AfterburnerWarning();
@@ -325,7 +325,7 @@ public partial class MaskWindow : Window
     {
         if (Process.GetProcessesByName("MSIAfterburner").Length > 0)
         {
-            _logger.LogWarning("检测到 MSI Afterburner 正在运行，如果信息位于特定UI上遮盖图像识别要素可能导致识别失败，请关闭MSI Afterburner 或者调整信息位置后重试！");
+            _logger.LogWarning(Service.I18n.I18nService.Instance.Translate("检测到 MSI Afterburner 正在运行，如果信息位于特定UI上遮盖图像识别要素可能导致识别失败，请关闭MSI Afterburner 或者调整信息位置后重试！"));
         }
     }
 

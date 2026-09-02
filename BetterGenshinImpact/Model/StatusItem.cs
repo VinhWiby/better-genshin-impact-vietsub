@@ -8,7 +8,8 @@ namespace BetterGenshinImpact.Model
     {
         public string Name { get; }
         public string Icon { get; }
-        public string DisplayName { get; }
+        public string DisplayName => Service.I18n.I18nService.Instance.Translate(_displayName);
+        private readonly string _displayName;
         private INotifyPropertyChanged _sourceObject { get; set; }
         private string _propertyName { get; set; }
 
@@ -21,18 +22,27 @@ namespace BetterGenshinImpact.Model
             if (separatorIndex > 0)
             {
                 Icon = name[..separatorIndex];
-                DisplayName = name[(separatorIndex + 1)..];
+                _displayName = name[(separatorIndex + 1)..];
             }
             else
             {
                 Icon = string.Empty;
-                DisplayName = name;
+                _displayName = name;
             }
             _sourceObject = sourceObject;
             _propertyName = propertyName;
 
             _sourceObject.PropertyChanged += OnSourcePropertyChanged;
+            Service.I18n.I18nService.Instance.PropertyChanged += OnI18nPropertyChanged;
             IsEnabled = GetSourceValue();
+        }
+
+        private void OnI18nPropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(Service.I18n.I18nService.Revision))
+            {
+                OnPropertyChanged(nameof(DisplayName));
+            }
         }
 
         private bool GetSourceValue()

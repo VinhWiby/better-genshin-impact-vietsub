@@ -56,7 +56,7 @@ public class GameSettingsChecker
             var lang = (TextLanguage)settings.DeviceLanguageType;
             if (lang != TextLanguage.SimplifiedChinese)
             {
-                TaskControl.Logger.LogWarning("当前游戏语言{Lang}不是简体中文，部分功能可能无法正常使用。The game language is not Simplified Chinese, some functions may not work properly", lang);
+                TaskControl.Logger.LogWarning(Service.I18n.I18nService.Instance.Translate("当前游戏语言{Lang}不是简体中文，部分功能可能无法正常使用。The game language is not Simplified Chinese, some functions may not work properly"), lang);
             }
         }
         catch (Exception e)
