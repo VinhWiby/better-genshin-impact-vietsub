@@ -8,6 +8,7 @@ using System.Globalization;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text;
+using Wpf.Ui.Violeta.Appearance;
 
 namespace BetterGenshinImpact.Service.I18n;
 
@@ -45,6 +46,7 @@ public sealed class I18nService : INotifyPropertyChanged
             var culture = CultureInfo.GetCultureInfo(language);
             CultureInfo.CurrentUICulture = culture;
             CultureInfo.DefaultThreadCurrentUICulture = culture;
+            I18N.Culture = culture;
         }
         catch (CultureNotFoundException)
         {

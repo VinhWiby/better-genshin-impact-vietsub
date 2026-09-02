@@ -209,7 +209,7 @@ public partial class App : Application
                 // Configuration
                 //services.Configure<AppConfig>(context.Configuration.GetSection(nameof(AppConfig)));
 
-                I18N.Culture = new CultureInfo("zh-Hans"); // #1846
+                I18N.Culture = CultureInfo.CurrentUICulture; // #1846
             }
         )
         .Build();
